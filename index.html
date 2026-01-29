@@ -1,54 +1,62 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Replicode | Build, Learn, Replicate</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          perspective: {
-            '1000': '1000px',
-            '2000': '2000px',
-          }
-        }
-      }
-    }
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .glass {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .dark .glass {
-      background: rgba(15, 23, 42, 0.7);
-    }
-  </style>
-<script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "framer-motion": "https://esm.sh/framer-motion@^11.11.11"
-  }
-}
-</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UI with Curly Lines Background</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-slate-50 text-gray-900 dark:bg-slate-950 dark:text-slate-100">
-  <div id="root"></div>
+<body>
+  <div class="app">
+    <header class="site-header">
+      <h1>My App</h1>
+      <p class="subtitle">Clean UI + animated curly background</p>
+    </header>
+
+    <main class="content">
+      <section class="card">
+        <h2>Feature</h2>
+        <p>Nice microinteraction and clear layout — try resizing or toggling motion preference.</p>
+        <button class="cta">Get Started</button>
+      </section>
+    </main>
+  </div>
+
+  <!-- Background svg / visual layer -->
+  <div class="bg-visual" aria-hidden="true">
+    <svg class="curly-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="14" result="b" />
+          <feColorMatrix values="1 0 0 0 0
+                                 0 1 0 0 0
+                                 0 0 1 0 0
+                                 0 0 0 0.9 0"/>
+        </filter>
+        <linearGradient id="g1" x1="0" x2="1">
+          <stop offset="0%" stop-color="#7c5cff"/>
+          <stop offset="100%" stop-color="#2fe7a6"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Multiple curly paths layered with different durations and offsets -->
+      <g class="curly-layer layer-1" style="filter:url(#softBlur); mix-blend-mode:screen;">
+        <path class="curly" d="M-200,220 C200,80 400,360 800,220 C1200,80 1400,360 1800,220" stroke="url(#g1)" stroke-width="8" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <g class="curly-layer layer-2" style="filter:url(#softBlur); mix-blend-mode:screen;">
+        <path class="curly" d="M-200,420 C200,520 400,220 800,420 C1200,620 1400,220 1800,420" stroke="#ff7a9a" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9"/>
+      </g>
+
+      <g class="curly-layer layer-3" style="filter:url(#softBlur); mix-blend-mode:screen;">
+        <path class="curly" d="M-200,620 C200,560 400,780 800,620 C1200,460 1400,780 1800,620" stroke="#ffd47a" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8"/>
+      </g>
+    </svg>
+
+    <!-- Beat overlay -->
+    <div class="beat-overlay"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
