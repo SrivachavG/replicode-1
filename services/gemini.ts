@@ -14,8 +14,10 @@ const PROJECT_SCHEMA = {
 };
 
 export async function generateProjectIdea(topic?: string) {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
-  const model = 'gemini-3-flash-preview';
+  // Use process.env.API_KEY directly as per guidelines
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Using gemini-3-pro-preview for complex reasoning and architecting tasks
+  const model = 'gemini-3-pro-preview';
   
   const prompt = topic 
     ? `Generate a project to replicate related to: ${topic}. Provide a realistic coding challenge.`
@@ -31,6 +33,7 @@ export async function generateProjectIdea(topic?: string) {
       }
     });
     
+    // Access response.text as a property, not a method
     return JSON.parse(response.text.trim());
   } catch (error) {
     console.error("Error generating project idea:", error);
